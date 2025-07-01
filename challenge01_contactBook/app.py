@@ -45,6 +45,14 @@ def toggle_favorite(index):
     status = "favoritado" if contact['is_favorite'] else "desfavoritado"
     print(f"O contato {contact['name']} foi {status}.")
 
+def view_favorite_contacts(contacts):
+    if not contacts:
+        print("Nenhum contato cadastrado.")
+        return
+    for index, contact in enumerate(contacts, start=1):
+        if contact['is_favorite']:
+            print(f"{index}. ❤ {contact['name']} - {contact['phone']} - {contact['email']}")
+
 contacts = []
 
 while True:
@@ -80,6 +88,9 @@ while True:
         view_contacts(contacts)
         index = int(input("Informe o número (index) do contato que deseja favoritar/desfavoritar: ")) - 1
         toggle_favorite(index)
+    
+    elif selected_option == "5":
+        view_favorite_contacts(contacts)
 
     elif selected_option == "7":
         print("Saindo do programa...")
