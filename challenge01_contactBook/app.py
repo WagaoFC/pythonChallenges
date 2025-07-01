@@ -17,7 +17,24 @@ def view_contacts(contacts):
         return
     for index, contact in enumerate(contacts, start=1):
         favorite_status = "❤" if contact['is_favorite'] else ""
-        print(f"{favorite_status} {index}. {contact['name']} - {contact['phone']} - {contact['email']}")
+        print(f"{index}. {favorite_status} {contact['name']} - {contact['phone']} - {contact['email']}")
+
+def update_contact(index):
+    if index < 0 or index >= len(contacts):
+        print("Contato não encontrado.")
+        return
+    print("Informe os novos dados do contato:")
+    name = input("Nome: ")
+    phone = input("Telefone: ")
+    email = input("Email: ")
+    is_favorite = input("É favorito? (s/n): ").lower() == 's'
+    contacts[index] = {
+        'name': name,
+        'phone': phone,
+        'email': email,
+        'is_favorite': is_favorite
+    }
+    print(f"Contato de {name} atualizado com sucesso!")
 
 contacts = []
 
@@ -42,6 +59,12 @@ while True:
 
     elif selected_option == "2":
         view_contacts(contacts)
+
+    elif selected_option == "3":
+        print("Contatos disponíveis para edição:")
+        view_contacts(contacts)
+        index = int(input("Informe o número (index) do contato que deseja editar: ")) - 1
+        update_contact(index)
 
     elif selected_option == "7":
         print("Saindo do programa...")
