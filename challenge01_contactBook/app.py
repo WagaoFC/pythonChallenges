@@ -53,6 +53,13 @@ def view_favorite_contacts(contacts):
         if contact['is_favorite']:
             print(f"{index}. ❤ {contact['name']} - {contact['phone']} - {contact['email']}")
 
+def remove_contact(index):
+    if not (0 <= index < len(contacts)):
+        print("Contato não encontrado.")
+        return
+    removed_contact = contacts.pop(index)
+    print(f"Contato {removed_contact['name']} removido com sucesso!")
+
 contacts = []
 
 while True:
@@ -91,6 +98,12 @@ while True:
     
     elif selected_option == "5":
         view_favorite_contacts(contacts)
+
+    elif selected_option == "6":
+        print("Contatos disponíveis para remoção:")
+        view_contacts(contacts)
+        index = int(input("Informe o número (index) do contato que deseja remover: ")) - 1
+        remove_contact(index)
 
     elif selected_option == "7":
         print("Saindo do programa...")
