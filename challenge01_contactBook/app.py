@@ -8,10 +8,16 @@ def add_contact(name, phone, email, is_favorite=False):
         'email': email,
         'is_favorite': is_favorite
     }
-    print('contact => ', contact)
     contacts.append(contact)
-    print('contacts => ', contacts)
     print(f"{name} foi adicionado(a) com sucesso!")
+
+def view_contacts(contacts):
+    if not contacts:
+        print("Nenhum contato cadastrado.")
+        return
+    for index, contact in enumerate(contacts, start=1):
+        favorite_status = "❤" if contact['is_favorite'] else ""
+        print(f"{favorite_status} {index}. {contact['name']} - {contact['phone']} - {contact['email']}")
 
 contacts = []
 
@@ -32,8 +38,11 @@ while True:
         phone = input("Informe o telefone: ")
         email = input("Informe o email: ")
         is_favorite = input("É favorito? (s/n): ").lower() == 's'
-
         add_contact(name, phone, email, is_favorite)
+
+    elif selected_option == "2":
+        view_contacts(contacts)
+
     elif selected_option == "7":
         print("Saindo do programa...")
         break
