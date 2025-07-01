@@ -36,6 +36,15 @@ def update_contact(index):
     }
     print(f"Contato de {name} atualizado com sucesso!")
 
+def toggle_favorite(index):
+    if not (0 <= index < len(contacts)):
+        print("Contato não encontrado.")
+        return
+    contact = contacts[index]
+    contact['is_favorite'] = not contact['is_favorite']
+    status = "favoritado" if contact['is_favorite'] else "desfavoritado"
+    print(f"O contato {contact['name']} foi {status}.")
+
 contacts = []
 
 while True:
@@ -65,6 +74,12 @@ while True:
         view_contacts(contacts)
         index = int(input("Informe o número (index) do contato que deseja editar: ")) - 1
         update_contact(index)
+
+    elif selected_option == "4":
+        print("Contatos disponíveis para favoritar/desfavoritar:")
+        view_contacts(contacts)
+        index = int(input("Informe o número (index) do contato que deseja favoritar/desfavoritar: ")) - 1
+        toggle_favorite(index)
 
     elif selected_option == "7":
         print("Saindo do programa...")
